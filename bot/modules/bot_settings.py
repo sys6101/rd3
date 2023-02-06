@@ -589,6 +589,18 @@ def load_config():
     CAPTION_FONT = environ.get('CAPTION_FONT', '')
     if len(CAPTION_FONT) == 0:  
         CAPTION_FONT = 'code'
+    FSMAIL = environ.get('FSMAIL', '')
+    FSPASS = environ.get('FSPASS', '')
+    if len(FSMAIL) == 0 or len(FSPASS) == 0:
+        FSMAIL = None
+        FSPASS = None   
+    TOKENBONSHARE = environ.get('TOKENBONSHARE', '')
+    if len(TOKENBONSHARE) == 0:
+        TOKENBONSHARE = None      
+    FSLIMIT = environ.get('FSLIMIT', '')
+    if len(FSLIMIT) == 0:
+        FSLIMIT = 20          
+        
 
     DEF_IMDB_TEMP  = environ.get('IMDB_TEMPLATE', '')
     if len(DEF_IMDB_TEMP) == 0:
@@ -681,11 +693,14 @@ def load_config():
         Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --keep-alive 5", shell=True)
 
     config_dict.update({'AS_DOCUMENT': AS_DOCUMENT,
+                        'FSMAIL': FSMAIL,
+                        'FSPASS': FSPASS,
+                        'FSLIMIT': FSLIMIT,                          
                         'AUTHORIZED_CHATS': AUTHORIZED_CHATS,
                         'AUTO_DELETE_MESSAGE_DURATION': AUTO_DELETE_MESSAGE_DURATION,
                         'AUTO_DELETE_UPLOAD_MESSAGE_DURATION': AUTO_DELETE_UPLOAD_MESSAGE_DURATION,
                         'BASE_URL': BASE_URL,
-                        'BOT_TOKEN': BOT_TOKEN,
+                        
                         'DATABASE_URL': DATABASE_URL,
                         'DOWNLOAD_DIR': DOWNLOAD_DIR,
                         'OWNER_ID': OWNER_ID,
